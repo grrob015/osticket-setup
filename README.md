@@ -102,14 +102,20 @@ Once you register it, you should see the PHP settings and configurations change 
 
 ![15  restart webserver](https://github.com/user-attachments/assets/99fd4e6e-2317-44e2-8029-8569096f018b)
 
+## Installing osTicket
 
+Now that our webserver can support osTicket, we can finally install it. Start by unzipping the file named `osTicket-v1.15.8.zip` to a location of your choice. Once it's done extracting:
 
+1. Move the folder named `upload` into the folder `C:\inetpub\wwwroot` on your virtual machine.
+2. rename the `upload` folder to be **EXACTLY** `osTicket`. (⚠️ I really mean exactly.)
 
+![16  the big move](https://github.com/user-attachments/assets/17baa7c8-ca9b-4a02-8800-3ded2fd95944)
 
+Restart your IIS webserver again to register the new files.
 
+![15  restart webserver](https://github.com/user-attachments/assets/7eb7777c-1a8e-414c-b6c2-f493ae34c31c)
 
-
-
+## More IIS webserver configuration
 
 
 
