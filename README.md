@@ -117,22 +117,83 @@ Restart your IIS webserver again to register the new files.
 
 ## More IIS webserver configuration
 
+osTicket is now officially installed! In order to view our page, we can either type `localhost/osTicket` into our browser or use the IIS Manager to access the page. On the sidebar, open "Sites", then "Default Web Site", then click "osTicket" and then "Browse *80 (http)" on the right hand sidebar (**pictured below**):
 
+![17  osticket exists now](https://github.com/user-attachments/assets/c37ce001-0423-4f21-a0f5-89013e1ba6bf)
 
+You'll notice on the site that there are a list of features that osTicket supports but may not be enabled or functioning. osTicket doesn't need all of these, but some functionality may be removed, and it's good practice to enable features with our PHP manager, so we'll fix these!
 
+![18  things we must fix](https://github.com/user-attachments/assets/4cdb8eba-68a8-45e6-af42-06ffe97e31d7)
 
+Go to the PHP manager for osTicket with your IIS Manager. (⚠️ Be ABSOLUTELY SURE that you're modifying your PHP manager for osTicket, NOT the entire webserver!)
 
+![19  make sure its os ticket](https://github.com/user-attachments/assets/610f111e-ac43-4fdf-af00-39e0580bbd4c)
 
+Click "Enable or disable an extension" at the bottom of the PHP Manager menu.
 
+![20  php extensions](https://github.com/user-attachments/assets/77e9a2e7-3f54-4a9d-bed1-0d5bacab7717)
 
+Once in the list of PHP extensions you can enable or disable, enable these three extensions:
 
+- php_imap.dll
+- php_intl.dll
+- php_opcache.dll
 
+Simply right click them and select "Enable" from the list of options. (The webserver does NOT need to be refreshed to register the changes.)
 
+![21  enabling an extension example](https://github.com/user-attachments/assets/915816cd-e15b-4919-8646-d8dcaf4e443d)
 
+Navigate back to `localhost/osTicket`  in your browser and note the changes!
 
+![22  updated features](https://github.com/user-attachments/assets/62009578-8fc9-4b8f-816d-f81354c11c76)
 
+## osTicket config work
 
+Now that our webserver is fully configured for osTicket, it's time to work on the osTicket configuration itself! Start by browsing to `C:\inetpub\wwwroot\osTicket\include` and rename the file named `ost-sampleconfig.php` to `ost-config.php`. (⚠️ The new file name should be EXACTLY that!) This is just a very easy way to give osTicket the default config with a minimal amount of effort!
 
+![23  renaming config](https://github.com/user-attachments/assets/4bbaee41-507c-4102-9270-3524f1c39d0c)
 
+We also need to enable osTicket to make changes to the config file we've just given it, so we need to change the file permissions that `ost-config.php` has. To do this:
 
+1. Right click `ost-config.php` and select "Properties"
+2. Go to the "Security" tab and click "Advanced"
+3. Click "Disable inheritance"
+4. Select "Remove all inherited permissions from this object."
 
+The steps are shown visually below:
+
+![24  steps to remove inheritance](https://github.com/user-attachments/assets/c89f525b-01ae-4082-a181-04a5dbd96302)
+
+To give access to osTicket to modify and read the file, click "Add" in the advanced security settings, click "select a principal", type "everyone", and then check the "Full control" box for the specific permissions that everyone will have. Your permissions shoudl look like this:
+
+![25  permission granted](https://github.com/user-attachments/assets/3e2364d2-2d60-4685-8137-348366aa7409)
+
+⚠️ **BIG WARNING** ⚠️ This is not a cybersecurity tutorial! This is a demonstration of the setup process of osTicket! This is the fastest and simplest way to get what we need done. In a real business scenario, __follow the rule of least permissions__ and **only allow the user that osTicket represents** access to the file!
+
+## osTicket SQL database setup
+
+We're in the home stretch now! Navigate back to `localhost/osTicket` and click "Continue" at the bottom of the screen. Fill in the information you need to for the helpdesk and read the next line after you get to the section labelled "Database Settings".
+
+We have MYSQL installed on our computer, but unless we're a programming whizz we can't do much with it right now. Run the installer named `HeidiSQL_12.3.0.6589_Setup` to install a visual SQL client that will allow us to work more easily with our databases. No settings need changed for our purposes, so just accept the license and click through the installer.
+
+![26  heidi install picture](https://github.com/user-attachments/assets/44e9598f-0caa-43cc-863b-5af3eeecd4fb)
+
+We can now use HeidiSQL to create a database that osTicket will use to store and manage information like tickets and users! Launch HeidiSQL (either from the desktop icon, start menu, or the installer option) and click "New" in the bottom left hand corner. (⚠️ Don't click the arrow on the right hand side of the button.) Log into your existing SQL server with the password you created when installing MYSQL, click "Open", and you're in!
+
+![27  heidisql](https://github.com/user-attachments/assets/15016d74-a32d-40f9-a7c2-3c13e73ee1d4)
+
+![28  im in](https://github.com/user-attachments/assets/8645a1b6-5e03-49c6-b246-e99551034cfc)
+
+Once you're logged into your local SQL server, create a new database named `osTicket` by right clicking the server, selecting "Create", then "Database" (shown below):
+
+![29  create database](https://github.com/user-attachments/assets/6d2ecc79-1f1d-48dc-9aa3-4ecc79d525ab)
+
+Then, back in your osTicket page setup, fill in the information to link the database to osTicket and give it the credentials it needs to log into your SQL server.
+
+![30  the final install](https://github.com/user-attachments/assets/3d5c5c0f-ce56-4b5a-b80e-bfeee9785056)
+
+If you've followed along properly, you should see this waiting for you once osTicket finishes installing!
+
+![31  end result](https://github.com/user-attachments/assets/a37b1aef-7e2f-4450-88d8-b3a43035778e)
+
+Congratulations! You've successfully installed osTicket manually! In the **linked repository**, I'll be showing some ways that osTicket can be configured post-install.
