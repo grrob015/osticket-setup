@@ -21,6 +21,8 @@ If you don't know how to do part or all of this list, I made an [Azure Basics](h
 
 Extract the files on your virtual machine, and we'll be ready to begin!
 
+**Note:** if you don't want to download the files through google drive, the official [osTicket installation documentation](https://docs.osticket.com/en/latest/Getting%20Started/Installation.html) has a lot of helpful links.
+
 ![1  extracted files in a vm](https://github.com/user-attachments/assets/cdb55077-4522-450e-be96-15aa8e58af57)
 
 ## Enabling IIS (Internet Information Services) for Windows
@@ -47,6 +49,80 @@ In order to test that our webserver is running, we can type in `127.0.0.1` into 
 A PHP manager is a prerequisite for osTicket, so run the installer named `PHPManagerForIIS_V1.5.0.msi`. We're also going to install some tools for our PHP manager, specifically the URL Rewrite module, so ruin the installer called `rewrite_amd64_en-US.msi`. Neither require special directions, simply run the installers, agree to the licenses, and click through the dialogues.
 
 ![5  supplementary picture for a short section](https://github.com/user-attachments/assets/704db9a7-df47-4d12-b57f-b92582664474)
+
+Once both installers have run successfully, we need to **create a PHP folder on our C:\ drive.** It should be named exactly `PHP`. You can access your C:\ drive by either typing `C:\` into the address bar or click "This PC" on the sidebar and then select "Windows C:". When finished, your drive should look like this:
+
+![6  the php folder](https://github.com/user-attachments/assets/156a7c1a-8bac-4cec-a076-73b1c15de988)
+
+Next, we need to extract our PHP source and binary files into the folder we just created. From the osTicket installation files folder, right click the zipped folder named `php-7.3.8-nts-Win32-VC15-x86.zip`, select "Extract All..." then select "Browse", and choose `C:\PHP`, the folder we just created. This allows osTicket and other applications that rely on the PHP scripting language to find the binaries it needs by putting it in a place that it already 'looks' to decode files it detects as PHP. Our PHP folder should now look like this:
+
+![7  extracted php folder](https://github.com/user-attachments/assets/81237020-e8b5-4b98-a752-98a90749d833)
+
+## Installing C++
+
+Run the installer named `VC_redist.x86.exe`. Just agree to the license and click "Install."
+
+![8  cpp redist](https://github.com/user-attachments/assets/68074b31-d404-431d-b9bd-26716cd8f3f4)
+
+## Installing SQL and our SQL client
+
+SQL is a programming language designed to be used in databases, and it's going to hold all of the information about our helpdesk. In order to set it up, run the MYSQL installer, named `mysql-5.5.62-win32.ms`. Accept the license and click through the wizard, selecting "Typical" for your installation type.
+
+![9  select typical](https://github.com/user-attachments/assets/4d402429-681b-4407-af94-4fa96d1abd6a)
+
+Once the initial installation is complete, run the configuration wizard.
+
+![10  run config wizard](https://github.com/user-attachments/assets/55572d03-5fed-4f05-b8aa-561de7bce6db)
+
+Select "Standard Configuration", that will be more than enough for osTicket.
+
+![11  select standard](https://github.com/user-attachments/assets/fd692368-a632-440f-84f6-65157914ecc4)
+
+The default settings in the windows service menu are what we need, so click "Next" and then set the root password for your SQL server. I just did `root` for simplicity's sake, but this is for a demonstration and the server and virtual machine will be deleted afterwards. (⚠️ In real business circumstances, never have `root` as your root password. Choose a strong password and be very careful about who knows it or has access to it.)
+
+![12  root password](https://github.com/user-attachments/assets/585de3a8-7219-4f01-b1f3-b85514e921b5)
+
+After this, click "Execute" to set up the server, and MYSQL is installed and configured!
+
+## Configuring our webserver
+
+Now that we have PHP, SQL, and C++ installed, we have the languages we need to host osTicket on our own webserver. But if you go to IP address `127.0.0.1`, nothing looks different. That's because while we have a webserver and the languages, the webserver doesn't know that it needs to access them or that they even exist yet! In order to change that, we must open our IIS as an admin and enable certain functions in our IIS webserver. Simply type `iis` into your windows search menu and right click Internet Information Services Manager, selecting "Run as administrator".
+
+![13  accessing the iis menu](https://github.com/user-attachments/assets/b613367f-8182-4e1b-a509-86ba90c6d125)
+
+In order to register a new PHP manager, we must select "PHP Manager" from the IIS Manager menu that pops up, then do the following:
+
+1. Click "Register new PHP version"
+2. Click the three dots to browse to a file
+3. Select the executable from `C:\PHP`
+
+![14  3 step process to register php](https://github.com/user-attachments/assets/ae82a895-4459-4db6-a6d9-42523c1654e4)
+
+Once you register it, you should see the PHP settings and configurations change from "Not available" to "7.3.8", with the local files in C:\PHP referenced for configurations and settings. In order to apply the changes we have just made, we must **restart our webserver**. You can do this by selecting the webserver in the left hand sidebar and then clicking "Restart" under "Manage Server" in the right hand sidebar.
+
+![15  restart webserver](https://github.com/user-attachments/assets/99fd4e6e-2317-44e2-8029-8569096f018b)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
