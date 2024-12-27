@@ -192,8 +192,8 @@ Then, back in your osTicket page setup, fill in the information to link the data
 
 ![30  the final install](https://github.com/user-attachments/assets/3d5c5c0f-ce56-4b5a-b80e-bfeee9785056)
 
-If you've followed along properly, you should see this waiting for you once osTicket finishes installing!
+If you've followed along properly, you should see this waiting for you once osTicket finishes installing! **The very last step** is to go to `C:\inetpub\wwwroot\osTicket` and delete the `setup` folder for security reasons.
 
 ![31  end result](https://github.com/user-attachments/assets/a37b1aef-7e2f-4450-88d8-b3a43035778e)
 
-Congratulations! You've successfully installed osTicket manually! In the **linked repository**, I'll be showing some ways that osTicket can be configured post-install.
+Congratulations! You've successfully installed osTicket manually! In the [linked repository](https://github.com/grrob015/osticket-settings), I'll be showing some ways that osTicket can be configured post-install.
