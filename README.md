@@ -192,7 +192,7 @@ Then, back in your osTicket page setup, fill in the information to link the data
 
 ![30  the final install](https://github.com/user-attachments/assets/3d5c5c0f-ce56-4b5a-b80e-bfeee9785056)
 
-If you've followed along properly, you should see this waiting for you once osTicket finishes installing! **The very last steps** are to go to `C:\inetpub\wwwroot\osTicket` and delete the `setup` folder for security reasons, then run the `chmod 644 ost-config.php` command in an administrator PowerShell to remove write access from our config file for security reasons.
+If you've followed along properly, you should see this waiting for you once osTicket finishes installing! **The very last steps** are to go to `C:\inetpub\wwwroot\osTicket` and delete the `setup` folder for security reasons, then to change the permissions of `C:\inetpub\wwwroot\osTicket\include\ost-config.php` to "Read" and "Read & Execute" only. (Click [here](https://github.com/grrob015/osticket-setup/blob/main/README.md?plain=1#L165) for a refresher on how to get to file permissions.)
 <!-- Neither of these are like, necessary for the purposes of this demonstration, but they remove an annoying error that would live at the top of our webpage and I don't want my screenshots. -->
 
 ![31  end result](https://github.com/user-attachments/assets/a37b1aef-7e2f-4450-88d8-b3a43035778e)
