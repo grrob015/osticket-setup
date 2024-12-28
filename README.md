@@ -1,6 +1,16 @@
 # osticket-setup
 Setting up osTicket, a free, open source IT helpdesk platform.
 
+<h2>Environments and Technologies Used</h2>
+
+- Microsoft Azure (Virtual Machines/Compute)
+- Remote Desktop
+- Internet Information Services (IIS)
+
+<h2>Operating Systems Used </h2>
+
+- Windows 10</b> (21H2)
+
 ## Creating our osTicket host
 
 We will be hosting our osTicket helpdesk on a virtual machine in Microsoft Azure, so we will need to do the following:
